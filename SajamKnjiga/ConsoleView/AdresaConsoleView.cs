@@ -31,6 +31,7 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("\nAdrese - izaberite opciju:");
             Console.WriteLine("1: Dodaj adresu");
+            Console.WriteLine("2: Prikazi sve adrese");
             Console.WriteLine("0: Nazad");
         }
 
@@ -40,6 +41,9 @@ namespace SajamKnjiga.ConsoleView
             {
                 case "1":
                     AddAdresa();
+                    break;
+                case "2":
+                    ShowAllAdrese();
                     break;
             }
         }
@@ -66,6 +70,25 @@ namespace SajamKnjiga.ConsoleView
             string drzava = Console.ReadLine() ?? string.Empty;
 
             return new Adresa(ulica, broj, grad, drzava);
+        }
+
+        private void ShowAllAdrese()
+        {
+            PrintAdrese(_adresaDao.GetAll());
+        }
+
+        private void PrintAdrese(List<Adresa> adrese)
+        {
+            Console.WriteLine("\nAdrese:");
+            if (adrese.Count == 0)
+            {
+                Console.WriteLine("Nema unetih adresa.");
+                return;
+            }
+            foreach (Adresa a in adrese)
+            {
+                Console.WriteLine(a);
+            }
         }
     }
 }
