@@ -17,6 +17,10 @@ namespace SajamKnjiga.Model
         public string BrojLicneKarte { get; set; } = "";
         public int GodineIskustva { get; set; }
 
+
+        // Preuzeto iz SerializationExample (Vezbe 3)
+        public List<Knjiga> Knjige { get; set; } = new List<Knjiga>();
+
         public Autor()
         {
         }
