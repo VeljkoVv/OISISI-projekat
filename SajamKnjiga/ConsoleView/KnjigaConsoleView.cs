@@ -1,0 +1,80 @@
+﻿using SajamKnjiga.DAO;
+using SajamKnjiga.Model;
+
+namespace SajamKnjiga.ConsoleView
+{
+    // Preuzeto iz CRUDExample (Vezbe 3)
+    public class KnjigaConsoleView
+    {
+        private readonly KnjigaDAO _knjigaDao;
+
+        public KnjigaConsoleView(KnjigaDAO knjigaDao)
+        {
+            _knjigaDao = knjigaDao;
+        }
+
+        public void RunMenu()
+        {
+            while (true)
+            {
+                ShowMenu();
+                string userInput = Console.ReadLine() ?? "0";
+                if (userInput == "0")
+                {
+                    break;
+                }
+                HandleMenuInput(userInput);
+            }
+        }
+
+        private void ShowMenu()
+        {
+            Console.WriteLine("\nKnjige - izaberite opciju:");
+            Console.WriteLine("1: Dodaj knjigu");
+            Console.WriteLine("0: Nazad");
+        }
+
+        private void HandleMenuInput(string input)
+        {
+            switch (input)
+            {
+                case "1":
+                    AddKnjiga();
+                    break;
+            }
+        }
+
+        private void AddKnjiga()
+        {
+            Knjiga knjiga = InputKnjiga();
+            _knjigaDao.Add(knjiga);
+            Console.WriteLine("Knjiga dodata.");
+        }
+
+        private Knjiga InputKnjiga()
+        {
+            Console.WriteLine("Unesite ISBN: ");
+            string isbn = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Unesite naziv: ");
+            string naziv = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Unesite zanr: ");
+            string zanr = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Unesite godinu izdanja: ");
+            int godinaIzdanja = ConsoleViewUtils.SafeInputInt();
+
+            Console.WriteLine("Unesite cenu: ");
+            decimal cena = ConsoleViewUtils.SafeInputDecimal();
+
+            Console.WriteLine("Unesite broj strana: ");
+            int brojStrana = ConsoleViewUtils.SafeInputInt();
+
+            Console.WriteLine("Unesite ID izdavaca: ");
+            int izdavacId = ConsoleViewUtils.SafeInputInt();
+
+            return new Knjiga(isbn, naziv, zanr, godinaIzdanja, cena, brojStrana, izdavacId);
+        }
+    }
+}

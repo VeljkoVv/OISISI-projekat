@@ -38,5 +38,22 @@ namespace SajamKnjiga.ConsoleView
 
             return input;
         }
+
+
+        public static decimal SafeInputDecimal()
+        {
+            decimal input;
+
+            string rawInput = (Console.ReadLine() ?? string.Empty).Replace(',', '.');
+
+            while (!decimal.TryParse(rawInput, NumberStyles.Number, CultureInfo.InvariantCulture, out input))
+            {
+                Console.WriteLine("Nije validan broj, pokusajte ponovo: ");
+
+                rawInput = (Console.ReadLine() ?? string.Empty).Replace(',', '.');
+            }
+
+            return input;
+        }
     }
 }
