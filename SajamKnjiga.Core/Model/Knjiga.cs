@@ -14,6 +14,10 @@ namespace SajamKnjiga.Model
         public int BrojStrana { get; set; }
         public int IzdavacId { get; set; }
 
+
+        // Preuzeto iz SerializationExample (Vezbe 3)
+        public List<Autor> Autori { get; set; } = new List<Autor>();
+
         public Knjiga()
         {
         }
