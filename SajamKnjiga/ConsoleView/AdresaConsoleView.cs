@@ -33,6 +33,7 @@ namespace SajamKnjiga.ConsoleView
             Console.WriteLine("1: Dodaj adresu");
             Console.WriteLine("2: Prikazi sve adrese");
             Console.WriteLine("3: Izmeni adresu");
+            Console.WriteLine("4: Obrisi adresu");
             Console.WriteLine("0: Nazad");
         }
 
@@ -48,6 +49,9 @@ namespace SajamKnjiga.ConsoleView
                     break;
                 case "3":
                     UpdateAdresa();
+                    break;
+                case "4":
+                    RemoveAdresa();
                     break;
             }
         }
@@ -114,6 +118,19 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("Unesite ID adrese: ");
             return ConsoleViewUtils.SafeInputInt();
+        }
+
+        private void RemoveAdresa()
+        {
+            int id = InputId();
+            Adresa? removedAdresa = _adresaDao.Remove(id);
+            if (removedAdresa == null)
+            {
+                Console.WriteLine("Adresa nije pronadjena.");
+                return;
+            }
+
+            Console.WriteLine("Adresa obrisana.");
         }
     }
 }
