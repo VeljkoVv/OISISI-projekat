@@ -8,9 +8,9 @@ namespace SajamKnjiga
     {
         static void Main()
         {
-            AdresaDAO adresaDao = new AdresaDAO();
-            AdresaConsoleView adresaView = new AdresaConsoleView(adresaDao);
-            adresaView.RunMenu();
+            AutorDAO autorDao = new AutorDAO();
+            AutorConsoleView autorView = new AutorConsoleView(autorDao);
+            autorView.RunMenu();
         }
     }
 }
