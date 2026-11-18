@@ -31,6 +31,7 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("\nKnjige - izaberite opciju:");
             Console.WriteLine("1: Dodaj knjigu");
+            Console.WriteLine("2: Prikazi sve knjige");
             Console.WriteLine("0: Nazad");
         }
 
@@ -40,6 +41,9 @@ namespace SajamKnjiga.ConsoleView
             {
                 case "1":
                     AddKnjiga();
+                    break;
+                case "2":
+                    ShowAllKnjige();
                     break;
             }
         }
@@ -75,6 +79,25 @@ namespace SajamKnjiga.ConsoleView
             int izdavacId = ConsoleViewUtils.SafeInputInt();
 
             return new Knjiga(isbn, naziv, zanr, godinaIzdanja, cena, brojStrana, izdavacId);
+        }
+
+        private void ShowAllKnjige()
+        {
+            PrintKnjige(_knjigaDao.GetAll());
+        }
+
+        private void PrintKnjige(List<Knjiga> knjige)
+        {
+            Console.WriteLine("\nKnjige:");
+            if (knjige.Count == 0)
+            {
+                Console.WriteLine("Nema unetih knjiga.");
+                return;
+            }
+            foreach (Knjiga k in knjige)
+            {
+                Console.WriteLine(k);
+            }
         }
     }
 }
