@@ -1,5 +1,4 @@
 ﻿using SajamKnjiga.ConsoleView;
-using SajamKnjiga.DAO;
 
 namespace SajamKnjiga
 {
@@ -8,9 +7,8 @@ namespace SajamKnjiga
     {
         static void Main()
         {
-            KnjigaDAO knjigaDao = new KnjigaDAO();
-            KnjigaConsoleView knjigaView = new KnjigaConsoleView(knjigaDao);
-            knjigaView.RunMenu();
+            MainConsoleView mainView = new MainConsoleView();
+            mainView.RunMenu();
         }
     }
 }
