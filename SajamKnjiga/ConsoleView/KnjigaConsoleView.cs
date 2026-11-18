@@ -33,6 +33,7 @@ namespace SajamKnjiga.ConsoleView
             Console.WriteLine("1: Dodaj knjigu");
             Console.WriteLine("2: Prikazi sve knjige");
             Console.WriteLine("3: Izmeni knjigu");
+            Console.WriteLine("4: Obrisi knjigu");
             Console.WriteLine("0: Nazad");
         }
 
@@ -48,6 +49,9 @@ namespace SajamKnjiga.ConsoleView
                     break;
                 case "3":
                     UpdateKnjiga();
+                    break;
+                case "4":
+                    RemoveKnjiga();
                     break;
             }
         }
@@ -123,6 +127,19 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("Unesite ID knjige: ");
             return ConsoleViewUtils.SafeInputInt();
+        }
+
+        private void RemoveKnjiga()
+        {
+            int id = InputId();
+            Knjiga? removedKnjiga = _knjigaDao.Remove(id);
+            if (removedKnjiga == null)
+            {
+                Console.WriteLine("Knjiga nije pronadjena.");
+                return;
+            }
+
+            Console.WriteLine("Knjiga obrisana.");
         }
     }
 }
