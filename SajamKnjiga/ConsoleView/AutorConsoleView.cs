@@ -33,6 +33,7 @@ namespace SajamKnjiga.ConsoleView
             Console.WriteLine("1: Dodaj autora");
             Console.WriteLine("2: Prikazi sve autore");
             Console.WriteLine("3: Izmeni autora");
+            Console.WriteLine("4: Obrisi autora");
             Console.WriteLine("0: Nazad");
         }
 
@@ -48,6 +49,9 @@ namespace SajamKnjiga.ConsoleView
                     break;
                 case "3":
                     UpdateAutor();
+                    break;
+                case "4":
+                    RemoveAutor();
                     break;
             }
         }
@@ -126,6 +130,19 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("Unesite ID autora: ");
             return ConsoleViewUtils.SafeInputInt();
+        }
+
+        private void RemoveAutor()
+        {
+            int id = InputId();
+            Autor? removedAutor = _autorDao.Remove(id);
+            if (removedAutor == null)
+            {
+                Console.WriteLine("Autor nije pronadjen.");
+                return;
+            }
+
+            Console.WriteLine("Autor obrisan.");
         }
     }
 }
