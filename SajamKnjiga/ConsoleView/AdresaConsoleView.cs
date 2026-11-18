@@ -31,6 +31,9 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("\nAdrese - izaberite opciju:");
             Console.WriteLine("1: Dodaj adresu");
+            Console.WriteLine("2: Prikazi sve adrese");
+            Console.WriteLine("3: Izmeni adresu");
+            Console.WriteLine("4: Obrisi adresu");
             Console.WriteLine("0: Nazad");
         }
 
@@ -40,6 +43,15 @@ namespace SajamKnjiga.ConsoleView
             {
                 case "1":
                     AddAdresa();
+                    break;
+                case "2":
+                    ShowAllAdrese();
+                    break;
+                case "3":
+                    UpdateAdresa();
+                    break;
+                case "4":
+                    RemoveAdresa();
                     break;
             }
         }
@@ -66,6 +78,59 @@ namespace SajamKnjiga.ConsoleView
             string drzava = Console.ReadLine() ?? string.Empty;
 
             return new Adresa(ulica, broj, grad, drzava);
+        }
+
+        private void ShowAllAdrese()
+        {
+            PrintAdrese(_adresaDao.GetAll());
+        }
+
+        private void PrintAdrese(List<Adresa> adrese)
+        {
+            Console.WriteLine("\nAdrese:");
+            if (adrese.Count == 0)
+            {
+                Console.WriteLine("Nema unetih adresa.");
+                return;
+            }
+            foreach (Adresa a in adrese)
+            {
+                Console.WriteLine(a);
+            }
+        }
+
+        private void UpdateAdresa()
+        {
+            int id = InputId();
+            Adresa adresa = InputAdresa();
+            adresa.Id = id;
+            Adresa? updatedAdresa = _adresaDao.Update(adresa);
+            if (updatedAdresa == null)
+            {
+                Console.WriteLine("Adresa nije pronadjena.");
+                return;
+            }
+
+            Console.WriteLine("Adresa izmenjena.");
+        }
+
+        private int InputId()
+        {
+            Console.WriteLine("Unesite ID adrese: ");
+            return ConsoleViewUtils.SafeInputInt();
+        }
+
+        private void RemoveAdresa()
+        {
+            int id = InputId();
+            Adresa? removedAdresa = _adresaDao.Remove(id);
+            if (removedAdresa == null)
+            {
+                Console.WriteLine("Adresa nije pronadjena.");
+                return;
+            }
+
+            Console.WriteLine("Adresa obrisana.");
         }
     }
 }
