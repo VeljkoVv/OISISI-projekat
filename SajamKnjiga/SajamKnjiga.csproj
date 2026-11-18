@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ConsoleView\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SajamKnjiga.Core\SajamKnjiga.Core.csproj" />
   </ItemGroup>
 
