@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../SajamKnjiga.Core/SajamKnjiga.Core.csproj" Id="9b257cf2-699b-4d75-bce9-a0622a868275" />
   <Project Path="SajamKnjiga.csproj" />
 </Solution>
