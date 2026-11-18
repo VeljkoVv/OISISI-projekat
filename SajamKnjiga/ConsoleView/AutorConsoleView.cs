@@ -31,6 +31,7 @@ namespace SajamKnjiga.ConsoleView
         {
             Console.WriteLine("\nAutori - izaberite opciju:");
             Console.WriteLine("1: Dodaj autora");
+            Console.WriteLine("2: Prikazi sve autore");
             Console.WriteLine("0: Nazad");
         }
 
@@ -40,6 +41,9 @@ namespace SajamKnjiga.ConsoleView
             {
                 case "1":
                     AddAutor();
+                    break;
+                case "2":
+                    ShowAllAutori();
                     break;
             }
         }
@@ -78,6 +82,25 @@ namespace SajamKnjiga.ConsoleView
             int godineIskustva = ConsoleViewUtils.SafeInputInt();
 
             return new Autor(ime, prezime, datumRodjenja, adresaId, telefon, email, brojLicneKarte, godineIskustva);
+        }
+
+        private void ShowAllAutori()
+        {
+            PrintAutori(_autorDao.GetAll());
+        }
+
+        private void PrintAutori(List<Autor> autori)
+        {
+            Console.WriteLine("\nAutori:");
+            if (autori.Count == 0)
+            {
+                Console.WriteLine("Nema unetih autora.");
+                return;
+            }
+            foreach (Autor a in autori)
+            {
+                Console.WriteLine(a);
+            }
         }
     }
 }
