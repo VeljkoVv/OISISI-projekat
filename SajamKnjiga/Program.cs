@@ -8,9 +8,9 @@ namespace SajamKnjiga
     {
         static void Main()
         {
-            AutorDAO autorDao = new AutorDAO();
-            AutorConsoleView autorView = new AutorConsoleView(autorDao);
-            autorView.RunMenu();
+            KnjigaDAO knjigaDao = new KnjigaDAO();
+            KnjigaConsoleView knjigaView = new KnjigaConsoleView(knjigaDao);
+            knjigaView.RunMenu();
         }
     }
 }
